@@ -20,23 +20,23 @@ architecture logica of cronometro_959 is
     signal cuentaMin    : unsigned(3 downto 0);
     signal estadoActivo : std_logic;
 begin
-    process (relojBase, botonReinicio)
+    process (relojBase, botonReinicio, botonArranque, botonParada)
     begin
         if botonReinicio = '1' then
             cuentaUniSec <= (others => '0');
             cuentaDecSec <= (others => '0');
             cuentaMin    <= (others => '0');
             estadoActivo <= '0';
+				
+        elsif botonArranque = '1' then
+            estadoActivo <= '1'; 
             
+        elsif botonParada = '1' then
+            estadoActivo <= '0';   
+				
+				
         elsif relojBase'event and relojBase = '1' then
-            
-            -- Control de los botones de acción
-            if botonArranque = '1' then
-                estadoActivo <= '1';
-            elsif botonParada = '1' then
-                estadoActivo <= '0';
-            end if;
-            
+               
             -- Lógica de conteo del reloj
             if estadoActivo = '1' then
                 -- Si llega a 9:59, se detiene automáticamente
