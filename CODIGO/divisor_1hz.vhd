@@ -15,7 +15,7 @@ architecture logica of divisor_1hz is
 begin
     process (reloj50Mhz, reset1)
     begin
-        if reset1 = '1' then
+        if reset1 = '0' then
             cuenta1 <= 0; 
             estado1 <= '0';
         elsif reloj50Mhz'event and reloj50Mhz = '1' then
