@@ -30,9 +30,9 @@ begin
 				
 				
         elsif relojBase'event and relojBase = '1' then
-            if botonArranque = '1' then
+            if botonArranque = '0' then
                 estadoActivo <= '1';
-            elsif botonParada = '1' then
+            elsif botonParada = '0' then
                 estadoActivo <= '0';
             end if;  
             -- Lógica de conteo del reloj
