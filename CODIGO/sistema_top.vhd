@@ -10,7 +10,8 @@ entity sistema_top is
         
         dispMinutos   : out std_logic_vector(6 downto 0);
         dispDecenas   : out std_logic_vector(6 downto 0);
-        dispUnidades  : out std_logic_vector(6 downto 0)
+        dispUnidades  : out std_logic_vector(6 downto 0);
+		  reloj1hzled	 : out std_logic
     );
 end entity;
 
@@ -26,9 +27,9 @@ architecture estructural of sistema_top is
             botonReinicio : in  std_logic;
             botonArranque : in  std_logic;
             botonParada   : in  std_logic;
-            unidadesSec   : out std_logic_vector(3 downto 0);
-            decenasSec    : out std_logic_vector(3 downto 0);
-            unidadesMin   : out std_logic_vector(3 downto 0)
+            unidadesSec   : out std_logic_vector(6 downto 0);
+            decenasSec    : out std_logic_vector(6 downto 0);
+            unidadesMin   : out std_logic_vector(6 downto 0)
         );
     end component;
 
@@ -41,12 +42,11 @@ architecture estructural of sistema_top is
 
     -- Cables de interconexión interna
     signal cableReloj1hz : std_logic;
-    signal cableUniSec   : std_logic_vector(3 downto 0);
-    signal cableDecSec   : std_logic_vector(3 downto 0);
-    signal cableMin      : std_logic_vector(3 downto 0);
-
+	
 begin
-    
+	
+    reloj1hzled <= cableReloj1hz;
+	 
     U1: divisor_1hz port map (
         reloj50Mhz => reloj50Mhz,
         reset1     => botonReinicio,
@@ -58,24 +58,10 @@ begin
         botonReinicio => botonReinicio,
         botonArranque => botonArranque,
         botonParada   => botonParada,
-        unidadesSec   => cableUniSec,
-        decenasSec    => cableDecSec,
-        unidadesMin   => cableMin
+        unidadesSec   => dispUnidades,
+        decenasSec    => dispDecenas,
+        unidadesMin   => dispMinutos
     );
 
-    U3_Minutos: decodificador_7seg port map (
-        entradaBCD => cableMin, 
-        salida7seg => dispMinutos
-    );
-    
-    U4_Decenas: decodificador_7seg port map (
-        entradaBCD => cableDecSec, 
-        salida7seg => dispDecenas
-    );
-    
-    U5_Unidades: decodificador_7seg port map (
-        entradaBCD => cableUniSec, 
-        salida7seg => dispUnidades
-    );
 
 end architecture;
