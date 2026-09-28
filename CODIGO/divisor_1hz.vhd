@@ -1,9 +1,9 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity divisor_1hz is
+entity divisor_1hz is --(ya comenté el codigo en otro lado)
     port (
-        reloj50Mhz : in  std_logic;
+        reloj50Mhz : in  std_logic; 
         reset1     : in  std_logic; 
         reloj1hz   : out std_logic
     );
