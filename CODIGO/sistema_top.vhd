@@ -21,7 +21,7 @@ architecture estructural of sistema_top is
         port (reloj50Mhz, reset1 : in std_logic; reloj1hz : out std_logic);
     end component;
 
-    component cronometro_959 is
+    component cronometro_959 is --componetente del cronometro 959
         port (
             relojBase     : in  std_logic;
             botonReinicio : in  std_logic;
@@ -33,27 +33,20 @@ architecture estructural of sistema_top is
         );
     end component;
 
-    component decodificador_7seg is
-        port (
-            entradaBCD : in std_logic_vector(3 downto 0);
-            salida7seg : out std_logic_vector(6 downto 0)
-        );
-    end component;
-
-    -- Cables de interconexión interna
+    -- cables de conexión 
     signal cableReloj1hz : std_logic;
 	
 begin
 	
-    reloj1hzled <= cableReloj1hz;
+    reloj1hzled <= cableReloj1hz; --asignación del cable para que se vea la señal del reloj de 1hz en el punto de los 7 segmentos
 	 
-    U1: divisor_1hz port map (
+    U1: divisor_1hz port map (--mapeo del divizor de 1hz, entra el reloj de 50millones, entra el resed sel sistema y sale ya ael reloj del 1hz
         reloj50Mhz => reloj50Mhz,
         reset1     => botonReinicio,
         reloj1hz   => cableReloj1hz
     );
 
-    U2: cronometro_959 port map (
+    U2: cronometro_959 port map ( --mapeo del cronometro, aquí entra el reloj 1hz, el resed, botón de arranque, boton de parada, y salen las salidas de 7 segmentos ya decodificadas
         relojBase     => cableReloj1hz,
         botonReinicio => botonReinicio,
         botonArranque => botonArranque,
