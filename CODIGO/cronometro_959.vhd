@@ -59,20 +59,21 @@ begin
             
         end if;
     end process;
+	 -- decodificador interni para unidades de segundo
 	 process(cuentaUniSec)
     begin
         case std_logic_vector(cuentaUniSec) is
-            when "0000" => unidadesSec <= "1000000"; -- Muestra 0[cite: 2]
-            when "0001" => unidadesSec <= "1111001"; -- Muestra 1[cite: 2]
-            when "0010" => unidadesSec <= "0100100"; -- Muestra 2[cite: 2]
-            when "0011" => unidadesSec <= "0110000"; -- Muestra 3[cite: 2]
-            when "0100" => unidadesSec <= "0011001"; -- Muestra 4[cite: 2]
-            when "0101" => unidadesSec <= "0010010"; -- Muestra 5[cite: 2]
-            when "0110" => unidadesSec <= "0000010"; -- Muestra 6[cite: 2]
-            when "0111" => unidadesSec <= "1111000"; -- Muestra 7[cite: 2]
-            when "1000" => unidadesSec <= "0000000"; -- Muestra 8[cite: 2]
-            when "1001" => unidadesSec <= "0010000"; -- Muestra 9[cite: 2]
-            when others => unidadesSec <= "1111111"; -- Apagado total[cite: 2, 6]
+            when "0000" => unidadesSec <= "1000000";
+            when "0001" => unidadesSec <= "1111001"; 
+            when "0010" => unidadesSec <= "0100100";
+            when "0011" => unidadesSec <= "0110000"; 
+            when "0100" => unidadesSec <= "0011001"; 
+            when "0101" => unidadesSec <= "0010010"; 
+            when "0110" => unidadesSec <= "0000010";  
+            when "0111" => unidadesSec <= "1111000"; 
+            when "1000" => unidadesSec <= "0000000";
+            when "1001" => unidadesSec <= "0010000"; 
+            when others => unidadesSec <= "1111111"; 
         end case;
     end process;
 
